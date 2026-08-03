@@ -642,7 +642,13 @@
                 @auth
                     <div class="user-dropdown-container">
                         <button class="user-profile-btn" id="user-menu-toggle">
-                            <div class="user-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</div>
+                            <div class="user-avatar" style="overflow: hidden;">
+                                @if(Auth::user()->avatar_url)
+                                    <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                                @endif
+                            </div>
                             <span class="user-name">{{ Auth::user()->name }}</span>
                             <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
                         </button>
@@ -651,6 +657,10 @@
                                 <div class="user-dropdown-name">{{ Auth::user()->name }}</div>
                                 <div class="user-dropdown-email">{{ Auth::user()->email }}</div>
                             </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="{{ route('profile') }}" class="user-dropdown-item" style="text-decoration: none;">
+                                <i class="fa-regular fa-user"></i> Profil Saya
+                            </a>
                             <div class="user-dropdown-divider"></div>
                             <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                                 @csrf
