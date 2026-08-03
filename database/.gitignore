@@ -1,1 +1,2 @@
-*.sqlite*
+# Ignore SQLite database backup files if any, but keep database.sqlite
+# *.sqlite
