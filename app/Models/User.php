@@ -51,15 +51,16 @@ class User extends Authenticatable
     /**
      * Accessor untuk URL Avatar Pengguna.
      */
-    public function getAvatarUrlAttribute(): ?string
+    public function getAvatarUrlAttribute(): string
     {
         if ($this->avatar) {
-            if (str_starts_with($this->avatar, 'http://') || str_starts_with($this->avatar, 'https://')) {
+            if (str_starts_with($this->avatar, 'http://') || str_starts_with($this->avatar, 'https://') || str_starts_with($this->avatar, 'data:image')) {
                 return $this->avatar;
             }
-            return asset('storage/' . $this->avatar);
+            return asset($this->avatar);
         }
 
-        return null;
+        // Default UI Avatar Generator jika belum ada avatar
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=1C1917&color=C59B27&bold=true';
     }
 }

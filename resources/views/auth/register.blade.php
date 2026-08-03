@@ -159,6 +159,16 @@
         font-size: 0.8rem;
         margin-top: 0.2rem;
     }
+
+    @media (max-width: 480px) {
+        .auth-card {
+            padding: 1.8rem 1.3rem;
+            border-radius: var(--radius-md);
+        }
+        .auth-header h1 {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 @endpush
 

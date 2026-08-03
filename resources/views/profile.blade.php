@@ -308,6 +308,25 @@
             grid-template-columns: 1fr;
         }
     }
+
+    @media (max-width: 480px) {
+        .card-box {
+            padding: 1.5rem 1.1rem;
+            border-radius: var(--radius-md);
+        }
+        .profile-header h1 {
+            font-size: 1.7rem;
+        }
+        .profile-cart-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        .profile-cart-item img {
+            width: 100%;
+            height: 140px;
+        }
+    }
 </style>
 @endpush
 
@@ -338,12 +357,7 @@
                 <!-- Avatar Preview & Upload -->
                 <div class="avatar-section">
                     <div class="avatar-preview-container">
-                        @if($user->avatar)
-                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" id="avatar-preview-img">
-                        @else
-                            <div class="avatar-fallback" id="avatar-fallback-text">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
-                            <img src="" alt="{{ $user->name }}" id="avatar-preview-img" style="display: none;">
-                        @endif
+                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" id="avatar-preview-img" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=1C1917&color=C59B27&bold=true';">
                     </div>
 
                     <label class="avatar-upload-btn">

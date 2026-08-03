@@ -464,13 +464,71 @@
     }
 
     @media (max-width: 768px) {
+        .hero-section {
+            padding: 3rem 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+        }
+        .hero-desc {
+            font-size: 1rem;
+        }
         .modal-card {
             grid-template-columns: 1fr;
             max-height: 90vh;
             overflow-y: auto;
+            width: 95%;
+        }
+        .controls-bar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1rem;
+        }
+        .category-pills {
+            width: 100%;
+        }
+        .sort-select-wrapper {
+            justify-content: space-between;
+        }
+        .sort-select {
+            flex: 1;
+        }
+        .product-grid {
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-section {
+            padding: 2.2rem 1.2rem;
+            border-radius: var(--radius-md);
         }
         .hero-title {
-            font-size: 2.2rem;
+            font-size: 1.75rem;
+        }
+        .hero-tag {
+            font-size: 0.78rem;
+            padding: 0.3rem 0.8rem;
+        }
+        .hero-buttons {
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+        .trust-stats {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .stat-card {
+            padding: 1.1rem;
         }
     }
 </style>

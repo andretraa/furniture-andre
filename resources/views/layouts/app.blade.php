@@ -370,7 +370,7 @@
         .cart-drawer {
             position: fixed;
             top: 0;
-            right: -420px;
+            right: 0;
             width: 100%;
             max-width: 420px;
             height: 100vh;
@@ -379,11 +379,12 @@
             box-shadow: var(--shadow-lg);
             display: flex;
             flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .cart-overlay.active .cart-drawer {
-            transform: translateX(-420px);
+            transform: translateX(0);
         }
 
         .cart-header {
@@ -595,11 +596,57 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0.9rem 1.2rem;
+            }
             .navbar-container {
                 flex-wrap: wrap;
+                gap: 0.8rem;
             }
             .nav-search {
                 order: 3;
+                max-width: 100%;
+                margin-top: 0.2rem;
+            }
+            .main-container {
+                padding: 1.5rem 1rem 3rem 1rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.75rem 0.9rem;
+            }
+            .logo-text {
+                font-size: 1.25rem;
+            }
+            .logo-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 1rem;
+            }
+            .nav-actions {
+                gap: 0.5rem;
+            }
+            .btn-nav-login {
+                padding: 0.45rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .btn-nav-register {
+                padding: 0.45rem 0.85rem;
+                font-size: 0.8rem;
+            }
+            .user-name {
+                display: none;
+            }
+            .user-profile-btn {
+                padding: 0.3rem;
+            }
+            .cart-drawer {
                 max-width: 100%;
             }
         }
@@ -643,11 +690,7 @@
                     <div class="user-dropdown-container">
                         <button class="user-profile-btn" id="user-menu-toggle">
                             <div class="user-avatar" style="overflow: hidden;">
-                                @if(Auth::user()->avatar_url)
-                                    <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                                @else
-                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                                @endif
+                                <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=1C1917&color=C59B27&bold=true';">
                             </div>
                             <span class="user-name">{{ Auth::user()->name }}</span>
                             <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>

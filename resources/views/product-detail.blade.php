@@ -209,10 +209,38 @@
     @media (max-width: 900px) {
         .detail-grid {
             grid-template-columns: 1fr;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
+            gap: 2rem;
         }
         .main-image-wrap {
-            height: 320px;
+            height: 380px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .detail-grid {
+            padding: 1.2rem;
+            border-radius: var(--radius-md);
+        }
+        .main-image-wrap {
+            height: 260px;
+        }
+        .detail-title {
+            font-size: 1.6rem;
+        }
+        .action-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.9rem;
+        }
+        .qty-selector {
+            justify-content: space-between;
+        }
+        .btn-lg-cart {
+            width: 100%;
+        }
+        .spec-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>

@@ -48,18 +48,12 @@ class ProfileController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
-        // Upload foto profil file jika diunggah
+        // Konversi foto profil file ke Base64 Data URI agar kompatibel penuh dengan Vercel Serverless & Local
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $destinationPath = public_path('uploads/avatars');
-
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
-            }
-
-            $file->move($destinationPath, $filename);
-            $user->avatar = 'uploads/avatars/' . $filename;
+            $mime = $file->getMimeType();
+            $base64Data = base64_encode(file_get_contents($file->getRealPath()));
+            $user->avatar = 'data:' . $mime . ';base64,' . $base64Data;
         } elseif (!empty($validated['avatar_url'])) {
             $user->avatar = $validated['avatar_url'];
         }
