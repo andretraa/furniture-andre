@@ -672,6 +672,10 @@
             </form>
 
             <div class="nav-actions">
+                <a href="{{ route('articles.index') }}" class="btn-nav-login" style="border: none; background: transparent;">
+                    <i class="fa-solid fa-book-open"></i> Artikel
+                </a>
+
                 <button class="btn-icon" id="cart-toggle" aria-label="Keranjang Belanja">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="cart-badge" id="cart-count">0</span>
@@ -701,6 +705,12 @@
                                 <div class="user-dropdown-email">{{ Auth::user()->email }}</div>
                             </div>
                             <div class="user-dropdown-divider"></div>
+                            @if(Auth::user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="user-dropdown-item" style="text-decoration: none; color: var(--accent-warm); font-weight: 600;">
+                                    <i class="fa-solid fa-gauge-high"></i> Dashboard Admin
+                                </a>
+                                <div class="user-dropdown-divider"></div>
+                            @endif
                             <a href="{{ route('profile') }}" class="user-dropdown-item" style="text-decoration: none;">
                                 <i class="fa-regular fa-user"></i> Profil Saya
                             </a>
@@ -772,8 +782,9 @@
                 </ul>
             </div>
             <div>
-                <h4 class="footer-title">Layanan</h4>
+                <h4 class="footer-title">Layanan & Informasi</h4>
                 <ul class="footer-links">
+                    <li><a href="{{ route('articles.index') }}">Profil & Artikel Perusahaan</a></li>
                     <li><a href="#">Custom Furniture</a></li>
                     <li><a href="#">Konsultasi Desain Interior</a></li>
                     <li><a href="#">Garansi Kayu 5 Tahun</a></li>

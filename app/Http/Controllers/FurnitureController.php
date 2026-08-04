@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -50,11 +51,13 @@ class FurnitureController extends Controller
         $products = $query->get();
 
         $featuredProducts = Product::where('is_featured', true)->take(3)->get();
+        $latestArticles = Article::orderBy('published_at', 'desc')->take(3)->get();
         $categories = ['All', 'Living Room', 'Bedroom', 'Dining Room', 'Office', 'Outdoor'];
 
         return view('home', [
             'products' => $products,
             'featuredProducts' => $featuredProducts,
+            'latestArticles' => $latestArticles,
             'categories' => $categories,
             'selectedCategory' => $request->get('category', 'All'),
             'searchQuery' => $request->get('q', ''),

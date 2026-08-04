@@ -675,8 +675,47 @@
             @endforeach
         </div>
     @endif
-
 </section>
+
+<!-- Company Profile & Articles Showcase -->
+@if(isset($latestArticles) && $latestArticles->count() > 0)
+<section style="margin-top: 4.5rem; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <div style="color: var(--accent-warm); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem;">
+                <i class="fa-solid fa-feather-pointed" style="margin-right: 4px;"></i> Profil & Inspirasi
+            </div>
+            <h2 class="font-heading" style="font-size: 2rem; font-weight: 800; color: var(--text-primary);">Artikel & Cerita DrewWood</h2>
+        </div>
+        <a href="{{ route('articles.index') }}" class="btn-nav-login" style="padding: 0.65rem 1.4rem;">
+            Lihat Semua Artikel <i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i>
+        </a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem;">
+        @foreach($latestArticles as $art)
+            <a href="{{ route('articles.show', $art->slug) }}" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: var(--transition); display: flex; flex-direction: column;" class="stat-card">
+                <div style="position: relative; width: 100%; height: 190px; overflow: hidden;">
+                    <img src="{{ $art->image_url }}" alt="{{ $art->title }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80';">
+                    <span style="position: absolute; top: 0.8rem; left: 0.8rem; background: rgba(28, 25, 23, 0.85); backdrop-filter: blur(6px); color: var(--accent-warm); font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: var(--radius-full);">
+                        {{ $art->category }}
+                    </span>
+                </div>
+                <div style="padding: 1.4rem; display: flex; flex-direction: column; flex: 1;">
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        <i class="fa-regular fa-calendar" style="margin-right: 4px;"></i> {{ $art->published_at ? $art->published_at->format('d M Y') : date('d M Y') }}
+                    </div>
+                    <h3 style="font-size: 1.15rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.6rem; color: var(--text-primary);">{{ $art->title }}</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1.2rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ $art->excerpt }}</p>
+                    <div style="margin-top: auto; font-size: 0.85rem; font-weight: 700; color: var(--accent-warm);">
+                        Baca Artikel <i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i>
+                    </div>
+                </div>
+            </a>
+        @endforeach
+    </div>
+</section>
+@endif
 
 <!-- Quick View Modal Structure -->
 <div class="modal-overlay" id="quick-view-modal">
